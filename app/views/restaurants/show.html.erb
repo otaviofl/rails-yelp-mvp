@@ -22,7 +22,15 @@
 
 <p>
   <strong>Reviews:</strong>
-  <%= @restaurant.reviews %>
+  <% if @restaurant.reviews.empty? %>
+    <%= link_to 'Leave a Review', new_restaurant_review_path(@restaurant) %>
+  <% else %>
+    <% @restaurant.reviews.each do |review| %>
+      Rating: <%= review.rating %><br>
+      Content: <%= review.content %><br>
+    <% end %>
+    <%= link_to 'Leave a Review_', new_restaurant_review_path(@restaurant) %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
